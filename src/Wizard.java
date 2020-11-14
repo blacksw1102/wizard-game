@@ -1,16 +1,21 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 public class Wizard extends GameObject {
 
 	Handler handler;
 	Game game;
 	
-	public Wizard(int x, int y, ID id, Handler handler, Game game) {
-		super(x, y, id);
+	private BufferedImage wizard_image;
+	
+	public Wizard(int x, int y, ID id, Handler handler, Game game, SpriteSheet ss) {
+		super(x, y, id, ss);
 		this.handler = handler;
 		this.game = game;
+		
+		wizard_image = ss.grabImage(1, 1, 32, 48);
 	}
 
 	@Override
@@ -56,13 +61,14 @@ public class Wizard extends GameObject {
 
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.blue);
-		g.fillRect(x, y, 32, 32);
+		// g.setColor(Color.blue);
+		// g.fillRect(x, y, 32, 32);
+		g.drawImage(wizard_image, x, y, null);
 	}
 
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle(x, y, 32, 32);
+		return new Rectangle(x, y, 32, 48);
 	}
 
 }
