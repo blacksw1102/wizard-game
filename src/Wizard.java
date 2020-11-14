@@ -61,6 +61,10 @@ public class Wizard extends GameObject {
 					game.ammo += 10;
 					handler.removeObject(tempObject);
 				}
+			} else if(tempObject.getId() == ID.Enemy) {
+				if(getBounds().intersects(tempObject.getBounds())) {
+					game.hp -= 1;
+				}
 			}
 			
 		}
