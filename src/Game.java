@@ -24,6 +24,7 @@ public class Game extends Canvas implements Runnable {
 		handler = new Handler();
 		camera = new Camera(0, 0);
 		this.addKeyListener(new KeyInput(handler));
+		this.addMouseListener(new MouseInput(handler, camera));
 		
 		// 이미지 로드 때문에 딜레이가 약간 걸림
 		BufferedImageLoader loader = new BufferedImageLoader();

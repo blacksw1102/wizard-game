@@ -15,21 +15,36 @@ public class Wizard extends GameObject {
 	public void tick() {
 		x += velX;
 		y += velY;
+		
+		collision();
 
 		// movement
-		if(handler.isUp()) velY = -5;
+		if(handler.isUp()) velY = -3;
 		else if(!handler.isDown()) velY = 0;
 		
-		if(handler.isDown()) velY = 5;
+		if(handler.isDown()) velY = 3;
 		else if(!handler.isUp()) velY = 0;
 
-		if(handler.isRight()) velX = 5;
+		if(handler.isRight()) velX = 3;
 		else if(!handler.isLeft()) velX = 0;
 		
-		if(handler.isLeft()) velX = -5;
+		if(handler.isLeft()) velX = -3;
 		else if(!handler.isRight()) velX = 0;
 		
-		System.out.printf("ÁÂÇ¥(%d, %d)\n", x, y);
+	}
+	
+	private void collision() {
+		for(int i = 0; i < handler.object.size(); i++) {
+			
+			GameObject tempObject = handler.object.get(i);
+			if(tempObject.getId() == ID.Block) {
+				if(getBounds().intersects(tempObject.getBounds())) {
+					x += velX * -1;
+					y += velY * -1;
+				}
+			}
+			
+		}
 	}
 
 	@Override
@@ -40,7 +55,7 @@ public class Wizard extends GameObject {
 
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle(x, y, 32, 48);
+		return new Rectangle(x, y, 32, 32);
 	}
 
 }
